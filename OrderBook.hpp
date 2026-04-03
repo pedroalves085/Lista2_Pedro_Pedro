@@ -1,11 +1,12 @@
 #include "Order.hpp"
 #include "Transaction.hpp"
+
 class OrderBook {
 
 private:
 
-    // Estruturas internas escolhidas pelos alunos
-    // para armazenar ordens de compra, venda e transações
+    // Lista duplamente encadeada com as ordens
+    // Array dinâmico com as transações
 
 public:
 
