@@ -1,3 +1,6 @@
+#ifndef ORDERBOOK_HPP
+#define ORDERBOOK_HPP
+
 #include "Order.hpp"
 #include "Transaction.hpp"
 
@@ -26,3 +29,5 @@ public:
 
     // Outros métodos auxiliares, se necessário
 };
+
+#endif
