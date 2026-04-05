@@ -3,13 +3,14 @@
 
 #include "Order.hpp"
 #include "Transaction.hpp"
+#include "List.hpp"
 
 class OrderBook {
 
 private:
 
     // Lista duplamente encadeada com as ordens
-    // Array dinâmico com as transações
+    ListTransaction transicions;
 
 public:
 
