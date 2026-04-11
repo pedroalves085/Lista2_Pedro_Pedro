@@ -4,13 +4,14 @@
 #include "Order.hpp"
 #include "Transaction.hpp"
 #include "List.hpp"
+#include "DLList.hpp"
 
 class OrderBook {
 
 private:
 
-    // Lista duplamente encadeada com as ordens
-    ListTransaction transicions;
+    OrdersList orders;
+    ListTransaction transacions;
 
 public:
 
@@ -28,7 +29,6 @@ public:
     void printSellOrders();
     void printTransactions();
 
-    // Outros métodos auxiliares, se necessário
 };
 
 #endif

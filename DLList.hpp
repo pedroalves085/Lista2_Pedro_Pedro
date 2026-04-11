@@ -29,7 +29,9 @@ public:
     void insert(Order value);
     void removeFront();
     void removeEnd();
-    void remove(Order value){}
+    void remove(Order value);
+    OrderNode* getHead();
+    OrderNode* getTail();
 };
 
 #endif

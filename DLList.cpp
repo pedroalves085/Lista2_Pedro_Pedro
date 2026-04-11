@@ -16,8 +16,17 @@ OrdersList::OrdersList(){
     this->size = 0;
 }
 
-OrdersList::~OrdersList(){
+OrdersList :: OrdersList(){}
 
+OrdersList::~OrdersList(){
+    OrderNode* current = this -> head;
+
+    while (current != nullptr) {
+        OrderNode* next = current -> next;
+        delete current;
+
+        current = next;
+    }
 }
 
 void OrdersList::insert(Order value){
@@ -66,10 +75,9 @@ void OrdersList::removeEnd(){
     size--;
 }
 
-//Decidir oq ue queremos comparar dos objetos order para o while, colocando preço por enquanto
 void OrdersList::remove(Order value){
     OrderNode* current = this->head;
-    while (current != nullptr && current->value.getPrice() != value.getPrice()){
+    while (current != nullptr && current->value.getId() != value.getId()){
         current = current->next;
     }
     
@@ -91,4 +99,13 @@ void OrdersList::remove(Order value){
     delete current;
     size--;
 
+}
+
+
+OrderNode* OrdersList :: getHead(){
+    return this -> head;
+}
+
+OrderNode* OrdersList :: getTail(){
+    return this -> tail;
 }
