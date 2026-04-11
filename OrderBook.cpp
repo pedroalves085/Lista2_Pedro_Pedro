@@ -39,14 +39,39 @@ bool OrderBook :: submit(Order order){
                 }
             }
         }
+
+        current = current->next;
     }
 
     if(selected.getType() == 't'){
         this->orders.insert(order);
         return false;
     }else{
+        if(order.getType() == 'B'){
+
+            this->transacions.InsertTransaction(order.getId(), selected.getId(), selected.getPrice());
+        }else{
+            this->transacions.InsertTransaction(selected.getId(), order.getId(), selected.getPrice());
+        }
+        
         this->orders.remove(selected);
-        this->transacions.InsertTransaction();
         return true;
+    }
+}
+
+
+bool OrderBook :: cancel(int id){
+    OrderNode* current = this -> orders.getHead();
+    int count = 0;
+
+    while (current != nullptr || current->value.getId() != id){
+        current = current->next;
+        count ++;
+    }
+    
+    if(count == orders.getSize()){
+        return false;
+    }else{
+        orders.remove(current->value);
     }
 }

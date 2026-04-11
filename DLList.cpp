@@ -16,8 +16,6 @@ OrdersList::OrdersList(){
     this->size = 0;
 }
 
-OrdersList :: OrdersList(){}
-
 OrdersList::~OrdersList(){
     OrderNode* current = this -> head;
 
