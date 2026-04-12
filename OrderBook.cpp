@@ -4,10 +4,8 @@
 #include <iostream>
 using namespace std;
 
-OrderBook :: OrderBook(){
-    this -> orders = OrdersList();
-    this -> transactions = ListTransaction();
-}
+// Fazendo desse jeito evita os problemas de dooble free que estava tendo
+OrderBook :: OrderBook() : orders(), transactions() {}
 
 OrderBook :: ~OrderBook(){}
 
@@ -67,7 +65,7 @@ bool OrderBook :: cancel(int id){
     OrderNode* current = this -> orders.getHead();
     int count = 0;
 
-    while (current != nullptr || current->value.getId() != id){
+    while (current != nullptr && current->value.getId() != id){
         current = current->next;
         count ++;
     }
@@ -165,12 +163,12 @@ Order* OrderBook :: getSellOrders(int* n){
 void OrderBook::printBuyOrders(){
     cout << "Buy Orders:" << endl;
     if (getBuySize() == 0){
-        cout << "(empty)";
+        cout << "(empty)" << '\n' << endl;
         return;
     }
 
+    OrderNode* current = orders.getHead();
     for(int i=0; i < this->orders.getSize(); i++){
-        OrderNode* current = orders.getHead();
         if(current->value.getType() == 'B'){
             cout << "[" << current->value.getId() << " | " << current->value.getPrice() << " | " << current->value.getTimestamp() << "]" << endl << endl;
         }
@@ -181,12 +179,12 @@ void OrderBook::printBuyOrders(){
 void OrderBook::printSellOrders(){
     cout << "Sell Orders:" << endl;
     if (this->orders.getSize() - getBuySize() == 0){
-        cout << "(empty)";
+        cout << "(empty)" << '\n' << endl;
         return;
     }
 
+    OrderNode* current = orders.getHead();
     for(int i=0; i < this->orders.getSize(); i++){
-        OrderNode* current = orders.getHead();
         if(current->value.getType() == 'S'){
             cout << "[" << current->value.getId() << " | " << current->value.getPrice() << " | " << current->value.getTimestamp() << "]" << endl << endl;
         }
@@ -198,7 +196,7 @@ void OrderBook::printSellOrders(){
 void OrderBook::printTransactions(){
     cout << "Transactions:" << endl;
     if (this->transactions.getSize() == 0){
-        cout << "(empty)";
+        cout << "(empty)" << endl;
         return;
     }
 
