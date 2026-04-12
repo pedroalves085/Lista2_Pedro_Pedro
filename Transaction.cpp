@@ -11,9 +11,7 @@ Transaction :: Transaction(int buy_order_id, int sell_order_id, float execution_
 
 Transaction :: Transaction(){}
 
-Transaction :: ~Transaction(){
-    // Não precisa de destrutor por não alocamos memória
-}
+Transaction :: ~Transaction(){}
 
 int Transaction :: getBuyOrderId(){
     return this -> buy_order_id;
