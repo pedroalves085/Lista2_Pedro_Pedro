@@ -1,5 +1,4 @@
 #include "Transaction.hpp"
-
 using namespace std;
 
 Transaction :: Transaction(int buy_order_id, int sell_order_id, float execution_price){

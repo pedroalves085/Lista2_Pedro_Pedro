@@ -109,3 +109,7 @@ OrderNode* OrdersList :: getHead(){
 OrderNode* OrdersList :: getTail(){
     return this -> tail;
 }
+
+int OrdersList :: getSize(){
+    return this -> size;
+}

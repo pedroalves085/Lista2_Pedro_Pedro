@@ -1,5 +1,7 @@
 #include "OrderBook.hpp"
 #include "Order.hpp"
+#include <iostream>
+using namespace std;
 
 OrderBook :: OrderBook(){
     this -> orders = OrdersList();
@@ -50,3 +52,18 @@ bool OrderBook :: submit(Order order){
         return true;
     }
 }
+
+void OrderBook::printBuyOrders(){
+    if (this->orders.getSize() == 0){
+        cout << "(empty)";
+    }
+
+    for(int i=0; i < this->orders.getSize(); i++){
+        OrderNode* current = orders.getHead();
+        if(current->value.getType() == 'B'){
+            cout << "[" << current->value.getId() << "|" << current->value.getPrice() << "|" << current->value.getTimestamp() << "]" << endl;
+        }
+    }
+
+
+};
