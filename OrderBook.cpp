@@ -76,13 +76,14 @@ bool OrderBook :: cancel(int id){
         return false;
     }else{
         orders.remove(current->value);
+        return true;
     }
 }
 
 int OrderBook :: getBuySize(){
     int bsize = 0;
+    OrderNode* current = orders.getHead();
     for(int i=0; i < this->orders.getSize(); i++){
-        OrderNode* current = orders.getHead();
         if(current->value.getType() == 'B'){
             bsize++;
         }
@@ -113,15 +114,16 @@ Order* OrderBook :: getBuyOrders(int* n){
     *n = size;
 
     Order* new_arr = new Order[size];
+    OrderNode* current = orders.getHead();
 
     for(int i = 0; i < size; i++){
-        OrderNode* current = this->orders.getHead();
         if(current->value.getType() == 'B'){
             new_arr[i] = current->value;
         }
         current = current->next;
-        
     }
+
+    return new_arr;
 }
 
 Order* OrderBook :: getSellOrders(int* n){
@@ -129,18 +131,17 @@ Order* OrderBook :: getSellOrders(int* n){
     int size = this->orders.getSize() - getBuySize();
     *n = size;
 
-    //Euuuuuuuuuuuu não aguento maaaaaaaiiiiiiisssss essa vida de fgv, já estou ficando  loucooooooooooooooooo, matheus werner tenha pena de mim por favoooooorrrrrr.
-
     Order* new_arr = new Order[size];
+    OrderNode* current = orders.getHead();
 
     for(int i = 0; i < size; i++){
-        OrderNode* current = orders.getHead();
         if(current->value.getType() == 'S'){
             new_arr[i] = current->value;
         }
         current = current->next;
-        
     }
+
+    return new_arr;
 };
 
 void OrderBook::printBuyOrders(){
@@ -153,7 +154,7 @@ void OrderBook::printBuyOrders(){
     for(int i=0; i < this->orders.getSize(); i++){
         OrderNode* current = orders.getHead();
         if(current->value.getType() == 'B'){
-            cout << "[" << current->value.getId() << "|" << current->value.getPrice() << "|" << current->value.getTimestamp() << "]" << endl;
+            cout << "[" << current->value.getId() << " | " << current->value.getPrice() << " | " << current->value.getTimestamp() << "]" << endl;
         }
         current = current->next;
     }
@@ -169,7 +170,7 @@ void OrderBook::printSellOrders(){
     for(int i=0; i < this->orders.getSize(); i++){
         OrderNode* current = orders.getHead();
         if(current->value.getType() == 'S'){
-            cout << "[" << current->value.getId() << "|" << current->value.getPrice() << "|" << current->value.getTimestamp() << "]" << endl;
+            cout << "[" << current->value.getId() << " | " << current->value.getPrice() << " | " << current->value.getTimestamp() << "]" << endl;
         }
         current = current->next;
     }
@@ -184,7 +185,7 @@ void OrderBook::printTransactions(){
     }
 
     for(int i=0; i < this->transactions.getSize(); i++){
-        cout << "[" << this->transactions.getTransaction()[i]->getBuyOrderId() << "|" << this->transactions.getTransaction()[i]->getSellOrderId() << "|" << this->transactions.getTransaction()[i]->getExecutionPrice() << "]" << endl;
+        cout << "[" << this->transactions.getTransaction()[i]->getBuyOrderId() << " | " << this->transactions.getTransaction()[i]->getSellOrderId() << " | " << this->transactions.getTransaction()[i]->getExecutionPrice() << "]" << endl;
        
     }
 

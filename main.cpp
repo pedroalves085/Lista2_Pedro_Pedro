@@ -1,7 +1,11 @@
-#include "OrderBook.cpp"
-#include "Order.cpp"
+#include "OrderBook.hpp"
+#include "Order.hpp"
 
 int main(){
+    OrderBook book;
+    Order teste = Order(1, 'B', 10.0, 1);
+    book.submit(teste);
+    book.printBuyOrders();
 }
 
 
