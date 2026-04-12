@@ -96,6 +96,12 @@ int OrderBook :: getBuySize(){
 Transaction* OrderBook :: getTransactions(int* n){
     
     int size = transactions.getSize();
+
+    if(size == 0){
+        *n = 0;
+        return nullptr;
+    }
+
     *n = size;
     
     Transaction* new_arr = new Transaction[size];
@@ -111,6 +117,12 @@ Transaction* OrderBook :: getTransactions(int* n){
 Order* OrderBook :: getBuyOrders(int* n){
 
     int size = getBuySize();
+
+    if(size == 0){
+        *n = 0;
+        return nullptr;
+    }
+
     *n = size;
 
     Order* new_arr = new Order[size];
@@ -129,6 +141,12 @@ Order* OrderBook :: getBuyOrders(int* n){
 Order* OrderBook :: getSellOrders(int* n){
 
     int size = this->orders.getSize() - getBuySize();
+
+    if(size == 0){
+        *n = 0;
+        return nullptr;
+    }
+
     *n = size;
 
     Order* new_arr = new Order[size];
