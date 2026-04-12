@@ -146,7 +146,7 @@ Order* OrderBook :: getSellOrders(int* n){
 
 void OrderBook::printBuyOrders(){
     cout << "Buy Orders:" << endl;
-    if (this->orders.getSize() == 0){
+    if (getBuySize() == 0){
         cout << "(empty)";
         return;
     }
@@ -154,7 +154,7 @@ void OrderBook::printBuyOrders(){
     for(int i=0; i < this->orders.getSize(); i++){
         OrderNode* current = orders.getHead();
         if(current->value.getType() == 'B'){
-            cout << "[" << current->value.getId() << " | " << current->value.getPrice() << " | " << current->value.getTimestamp() << "]" << endl;
+            cout << "[" << current->value.getId() << " | " << current->value.getPrice() << " | " << current->value.getTimestamp() << "]" << endl << endl;
         }
         current = current->next;
     }
@@ -162,7 +162,7 @@ void OrderBook::printBuyOrders(){
 
 void OrderBook::printSellOrders(){
     cout << "Sell Orders:" << endl;
-    if (this->orders.getSize() == 0){
+    if (this->orders.getSize() - getBuySize() == 0){
         cout << "(empty)";
         return;
     }
@@ -170,7 +170,7 @@ void OrderBook::printSellOrders(){
     for(int i=0; i < this->orders.getSize(); i++){
         OrderNode* current = orders.getHead();
         if(current->value.getType() == 'S'){
-            cout << "[" << current->value.getId() << " | " << current->value.getPrice() << " | " << current->value.getTimestamp() << "]" << endl;
+            cout << "[" << current->value.getId() << " | " << current->value.getPrice() << " | " << current->value.getTimestamp() << "]" << endl << endl;
         }
         current = current->next;
     }
@@ -185,7 +185,7 @@ void OrderBook::printTransactions(){
     }
 
     for(int i=0; i < this->transactions.getSize(); i++){
-        cout << "[" << this->transactions.getTransaction()[i]->getBuyOrderId() << " | " << this->transactions.getTransaction()[i]->getSellOrderId() << " | " << this->transactions.getTransaction()[i]->getExecutionPrice() << "]" << endl;
+        cout << "[" << this->transactions.getTransaction()[i]->getBuyOrderId() << " | " << this->transactions.getTransaction()[i]->getSellOrderId() << " | " << this->transactions.getTransaction()[i]->getExecutionPrice() << "]" << endl << endl;
        
     }
 

@@ -6,6 +6,7 @@ int main(){
     Order teste = Order(1, 'B', 10.0, 1);
     book.submit(teste);
     book.printBuyOrders();
+    book.printSellOrders();
 }
 
 
