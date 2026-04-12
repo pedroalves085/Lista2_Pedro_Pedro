@@ -1,4 +1,4 @@
-# Lista2_Pedro_Pedro
+# Lista 2
 
 ## Descrição do projeto
 Este projeto traz uma solução em C++ para um sistema ordens de compra e venda de uma ação, que possuem um preço, um identificador único, o seu tipo, e um timestamp que representa a hora de chegada. No sistema, foram feitas as listas das ordens, para armazenar aquelas ainda pendentes e a lista de transações que armazena as ordens executadas. 
