@@ -11,7 +11,7 @@ class OrderBook {
 private:
 
     OrdersList orders;
-    ListTransaction transacions;
+    ListTransaction transactions;
 
 public:
 
@@ -28,6 +28,8 @@ public:
     void printBuyOrders();
     void printSellOrders();
     void printTransactions();
+
+    int getBuySize();
 
 };
 

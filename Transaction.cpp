@@ -1,5 +1,4 @@
 #include "Transaction.hpp"
-
 using namespace std;
 
 Transaction :: Transaction(int buy_order_id, int sell_order_id, float execution_price){
@@ -9,6 +8,8 @@ Transaction :: Transaction(int buy_order_id, int sell_order_id, float execution_
     this -> execution_price = execution_price;
 
 }
+
+Transaction :: Transaction(){}
 
 Transaction :: ~Transaction(){
     // Não precisa de destrutor por não alocamos memória

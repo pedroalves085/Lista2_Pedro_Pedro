@@ -38,3 +38,10 @@ void ListTransaction :: InsertTransaction(int buy_order_id, int sell_order_id, f
     this -> size ++;
 }
 
+int ListTransaction :: getSize(){
+    return this->size;
+}
+
+Transaction** ListTransaction :: getTransaction(){
+    return this -> transactions;
+}

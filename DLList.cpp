@@ -8,15 +8,15 @@ OrderNode::OrderNode(Order value){
     this->prev = nullptr;
 }
 
-OrderNode::~OrderNode(){}
+OrderNode :: ~OrderNode(){}
 
-OrdersList::OrdersList(){
+OrdersList :: OrdersList(){
     this->head = nullptr;
     this->tail = nullptr;
     this->size = 0;
 }
 
-OrdersList::~OrdersList(){
+OrdersList :: ~OrdersList(){
     OrderNode* current = this -> head;
 
     while (current != nullptr) {
@@ -106,4 +106,8 @@ OrderNode* OrdersList :: getHead(){
 
 OrderNode* OrdersList :: getTail(){
     return this -> tail;
+}
+
+int OrdersList :: getSize(){
+    return this -> size;
 }

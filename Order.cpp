@@ -1,5 +1,4 @@
 #include "Order.hpp"
-
 using namespace std;
 
 Order::Order(int id, char type, float price, int timestamp){

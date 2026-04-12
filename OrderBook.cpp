@@ -1,9 +1,12 @@
 #include "OrderBook.hpp"
 #include "Order.hpp"
+#include "Transaction.hpp"
+#include <iostream>
+using namespace std;
 
 OrderBook :: OrderBook(){
     this -> orders = OrdersList();
-    this -> transacions = ListTransaction();
+    this -> transactions = ListTransaction();
 }
 
 OrderBook :: ~OrderBook(){}
@@ -49,9 +52,9 @@ bool OrderBook :: submit(Order order){
     }else{
         if(order.getType() == 'B'){
 
-            this->transacions.InsertTransaction(order.getId(), selected.getId(), selected.getPrice());
+            this->transactions.InsertTransaction(order.getId(), selected.getId(), selected.getPrice());
         }else{
-            this->transacions.InsertTransaction(selected.getId(), order.getId(), selected.getPrice());
+            this->transactions.InsertTransaction(selected.getId(), order.getId(), selected.getPrice());
         }
         
         this->orders.remove(selected);
@@ -74,4 +77,115 @@ bool OrderBook :: cancel(int id){
     }else{
         orders.remove(current->value);
     }
+}
+
+int OrderBook :: getBuySize(){
+    int bsize = 0;
+    for(int i=0; i < this->orders.getSize(); i++){
+        OrderNode* current = orders.getHead();
+        if(current->value.getType() == 'B'){
+            bsize++;
+        }
+        current = current->next;
+    }
+    return bsize;
+}
+
+    
+Transaction* OrderBook :: getTransactions(int* n){
+    
+    int size = transactions.getSize();
+    *n = size;
+    
+    Transaction* new_arr = new Transaction[size];
+
+    for(int i = 0; i < size; i++){
+        new_arr[i] = *transactions.getTransaction()[i];
+    }
+
+    return new_arr;
+
+}
+
+Order* OrderBook :: getBuyOrders(int* n){
+
+    int size = getBuySize();
+    *n = size;
+
+    Order* new_arr = new Order[size];
+
+    for(int i = 0; i < size; i++){
+        OrderNode* current = this->orders.getHead();
+        if(current->value.getType() == 'B'){
+            new_arr[i] = current->value;
+        }
+        current = current->next;
+        
+    }
+}
+
+Order* OrderBook :: getSellOrders(int* n){
+
+    int size = this->orders.getSize() - getBuySize();
+    *n = size;
+
+    //Euuuuuuuuuuuu não aguento maaaaaaaiiiiiiisssss essa vida de fgv, já estou ficando  loucooooooooooooooooo, matheus werner tenha pena de mim por favoooooorrrrrr.
+
+    Order* new_arr = new Order[size];
+
+    for(int i = 0; i < size; i++){
+        OrderNode* current = orders.getHead();
+        if(current->value.getType() == 'S'){
+            new_arr[i] = current->value;
+        }
+        current = current->next;
+        
+    }
+};
+
+void OrderBook::printBuyOrders(){
+    cout << "Buy Orders:" << endl;
+    if (this->orders.getSize() == 0){
+        cout << "(empty)";
+        return;
+    }
+
+    for(int i=0; i < this->orders.getSize(); i++){
+        OrderNode* current = orders.getHead();
+        if(current->value.getType() == 'B'){
+            cout << "[" << current->value.getId() << "|" << current->value.getPrice() << "|" << current->value.getTimestamp() << "]" << endl;
+        }
+        current = current->next;
+    }
+}
+
+void OrderBook::printSellOrders(){
+    cout << "Sell Orders:" << endl;
+    if (this->orders.getSize() == 0){
+        cout << "(empty)";
+        return;
+    }
+
+    for(int i=0; i < this->orders.getSize(); i++){
+        OrderNode* current = orders.getHead();
+        if(current->value.getType() == 'S'){
+            cout << "[" << current->value.getId() << "|" << current->value.getPrice() << "|" << current->value.getTimestamp() << "]" << endl;
+        }
+        current = current->next;
+    }
+
+}
+
+void OrderBook::printTransactions(){
+    cout << "Transactions:" << endl;
+    if (this->transactions.getSize() == 0){
+        cout << "(empty)";
+        return;
+    }
+
+    for(int i=0; i < this->transactions.getSize(); i++){
+        cout << "[" << this->transactions.getTransaction()[i]->getBuyOrderId() << "|" << this->transactions.getTransaction()[i]->getSellOrderId() << "|" << this->transactions.getTransaction()[i]->getExecutionPrice() << "]" << endl;
+       
+    }
+
 }

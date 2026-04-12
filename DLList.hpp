@@ -32,6 +32,7 @@ public:
     void remove(Order value);
     OrderNode* getHead();
     OrderNode* getTail();
+    int getSize();
 };
 
 #endif
